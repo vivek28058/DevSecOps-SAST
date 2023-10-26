@@ -13,7 +13,7 @@ pipeline {
    stage ('Run SCA Scan') {
       steps {
         withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SYNK_TOKEN')]) {
-           sh 'mvn synk:test -fn'
+           sh 'mvn snyk:test -fn'
  }
 }
 }
