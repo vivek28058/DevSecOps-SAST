@@ -14,9 +14,8 @@ pipeline {
         stage('Run SCA Analysis using Snyk') {
             steps {
                 script {
-                    echo 'Starting Snyk test...'
-                    def snykOutput = bat(script: 'mvn snyk:test -fn', returnStdout: true)
-                    echo snykOutput
+                    withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
+			        bat 'mvn snyk:test -fn'
                 }
             }
         }
